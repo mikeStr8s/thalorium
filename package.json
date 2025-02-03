@@ -18,5 +18,8 @@
   },
   "devDependencies": {
     "@types/bun": "^1.2.2"
+  },
+  "patchedDependencies": {
+    "@portaljs/remark-wiki-link@1.2.0": "patches/@portaljs%2Fremark-wiki-link@1.2.0.patch"
   }
 }
