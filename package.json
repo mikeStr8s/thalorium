@@ -9,6 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.2.3"
+    "@astrojs/mdx": "^4.0.8",
+    "@portaljs/remark-wiki-link": "^1.2.0",
+    "astro": "^5.2.3",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "sass": "^1.83.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.2"
   }
 }
