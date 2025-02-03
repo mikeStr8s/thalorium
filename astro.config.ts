@@ -1,16 +1,21 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import remarkWikiLink from '@portaljs/remark-wiki-link';
+import remarkWikiLink, { getPermalinks } from '@portaljs/remark-wiki-link';
 
-// https://astro.build/config
+
 export default defineConfig({
   integrations: [mdx()],
   markdown: {
     remarkPlugins: [
       [remarkWikiLink, {
-        pathFormat: 'obsidian-short',
+        pathFormat: 'obsidian-absolute',
+        wikiLinkResolver: (slug) => [configureSlug(slug)]
       }]
     ]
   }
 });
+
+function configureSlug(slug: string) {
+  let newslug = slug.toLowerCase().replaceAll(' ', '-');
+  return ['legendarium/' + newslug];
+}
