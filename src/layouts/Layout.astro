@@ -1,22 +1,18 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="stylesheet" href="main.css">
+    <meta name="generator" content={Astro.generator} />
+    <title>Glimpse Of The Realms</title>
+  </head>
+  <body>
+    <slot />
+
+	<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script is:inline src="/main.js"></script>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

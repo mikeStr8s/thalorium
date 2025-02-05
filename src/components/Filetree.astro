@@ -1,0 +1,77 @@
+---
+import type { FileTree } from '../utils/filetree';
+
+interface Props {
+    filetree: FileTree;
+    parent?: string;
+}
+const { filetree, parent } = Astro.props as Props;
+
+function getParent(file: string) {
+    if (typeof parent === 'undefined') {
+        return file;
+    }
+    return `${parent}/${file}`;
+}
+
+function getLinkPath(file: string) {
+    if (typeof parent === 'undefined') {
+        return `/legendarium/${file}`;
+    }
+    return `/legendarium/${parent}/${file}`;
+}
+---
+<ul id="filetree">
+    {Array.from(filetree).map(([file, dir]) =>(<>
+        {(dir instanceof Map) ?
+        <li>
+            <span class="opener">{file}</span>
+            <Astro.self filetree={dir} parent={`${getParent(file)}`} />
+        </li>
+        :
+        <li><a href={getLinkPath(file)}>{file}</a></li>}
+    </>))}
+</ul>
+
+<style lang="scss">
+    $primary-color: #f3f3f3;
+    $secondary-color: #b0b0b0;
+
+    ul > li {
+        border-top: solid 1px #7c4dff;
+        margin-top: 5px;
+        padding-top: 5px;
+    }
+
+    ul > li:first-child {
+        border-top: 0;
+        margin-top: 0;
+        padding-top: 0;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            span.opener.active + ul {
+                display: block;
+            }
+            // span.opener:before {
+            //     content: 'V';
+            //     position: absolute;
+            //     right: 0;
+            // }
+            .opener {
+                color: $primary-color;
+            }
+            a {
+                text-decoration: none;
+                color: $secondary-color;
+            }
+            ul {
+                display: none;
+            }
+        }
+    }
+</style>
