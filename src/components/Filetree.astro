@@ -7,6 +7,8 @@ interface Props {
 }
 const { filetree, parent } = Astro.props as Props;
 
+let ulProps = !parent ? { 'id': 'filetree' } : {};
+
 function getParent(file: string) {
     if (typeof parent === 'undefined') {
         return file;
@@ -21,7 +23,8 @@ function getLinkPath(file: string) {
     return `/legendarium/${parent}/${file}`;
 }
 ---
-<ul id="filetree">
+
+<ul { ...ulProps }>
     {Array.from(filetree).map(([file, dir]) =>(<>
         {(dir instanceof Map) ?
         <li>
@@ -38,7 +41,7 @@ function getLinkPath(file: string) {
     $secondary-color: #b0b0b0;
 
     ul > li {
-        border-top: solid 1px #7c4dff;
+        border-top: solid 1px #5e3a7b;
         margin-top: 5px;
         padding-top: 5px;
     }
