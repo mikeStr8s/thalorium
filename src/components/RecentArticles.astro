@@ -21,9 +21,13 @@ const latestEntries = entries.slice(0, 3);
         <h2>Recent Articles</h2>
     </header>
     <div class="mini-posts">
-        {latestEntries.map((entry) => <Minipost post={entry} />)}
+        {latestEntries.map((entry, idx) => <Minipost post={entry} index={idx} />)}
     </div>
     <ul class="actions">
         <li><a href="#" class="button">More</a></li>
     </ul>
 </section>
+
+<style lang="scss">
+    
+</style>

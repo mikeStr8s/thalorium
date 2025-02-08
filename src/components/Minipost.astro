@@ -13,19 +13,36 @@ interface Props {
         data: InferEntrySchema<"legendarium">;
         rendered?: RenderedContent;
         filePath?: string;
-    };
+    }
+    index: number
 }
-const { post } = Astro.props as Props;
-
-// console.log(post);
-
+const { post, index } = Astro.props as Props;
 const { Content } = await render(post);
 
-console.log(Content);
+const firstChild = index === 0;
+const cssBorder = firstChild ? 0 : 'solid 1px #5e3a7b';
+const cssMargin = firstChild ? 0 : '5px';
+const cssPadding = firstChild ? 0 : '5px';
+
+const imgRegex = /<img[^>]*>/i;
+const match = post.rendered?.html.match(imgRegex);
+const firstImage = match ? match[0] : null;
 ---
 
-<article class="card">
-    <div class="mini-post-container"><Content /></div>
+<article class="mini-post">
+    <Fragment set:html={firstImage}/>
+    <div class="content"><Content /></div>
 </article>
 
-<style></style>
+<style lang="scss" define:vars={{ cssBorder, cssMargin, cssPadding }}>
+    .mini-post {
+        border-top: var(--cssBorder);
+        margin-top: var(--cssMargin);
+        padding-top: var(--cssPadding);
+    }
+
+    .content {
+        max-height: 150px;
+        overflow-y: hidden;
+    }
+</style>
