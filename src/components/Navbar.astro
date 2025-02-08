@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { buildFileTree } from "../utils/filetree";
 import Filetree from "./Filetree.astro";
 
-const entries = await getCollection('legendarium');
+const entries = await getCollection("legendarium");
 const ft = buildFileTree(entries.map((entry) => entry.id));
 ---
 
@@ -15,13 +15,4 @@ const ft = buildFileTree(entries.map((entry) => entry.id));
     <Filetree filetree={ft} />
 </nav>
 
-<style lang="scss">
-    .major {
-        h2 {
-            width: fit-content;
-            border-bottom: solid 3px #7c4dff;
-            margin-bottom: 1em;
-            padding-bottom: .5em;
-        }
-    }
-</style>
+<style lang="scss"></style>

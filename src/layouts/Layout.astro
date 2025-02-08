@@ -4,21 +4,40 @@ import Sidebar from "../components/Sidebar.astro";
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<link rel="stylesheet" href="/main.css">
-    <meta name="generator" content={Astro.generator} />
-    <title>Glimpse Of The Realms</title>
-  </head>
-  <body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="stylesheet" href="/main.css" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Glimpse Of The Realms</title>
+	</head>
+	<body>
+		<Sidebar />
+		<slot />
 
-	<Sidebar />
-    <slot />
-
-	<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script is:inline src="/main.js"></script>
-  </body>
+		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"
+		></script>
+		<script is:inline src="/main.js"></script>
+	</body>
 </html>
 
+<style lang="scss" is:global>
+	/* Default: Small devices such as large phones (less than 768px) */
+	.major {
+		h2 {
+			width: fit-content;
+			border-bottom: solid 3px #7c4dff;
+			margin-bottom: 1em;
+			padding-bottom: 0.5em;
+		}
+	}
+
+	/* Medium devices such as tablets (768px and up) */
+	@media only screen and (min-width: 768px) {
+	}
+
+	/* Large devices such as laptops (1024px and up) */
+	@media only screen and (min-width: 1024px) {
+	}
+</style>

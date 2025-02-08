@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import Minipost from "./Minipost.astro";
+
+const entries = await getCollection("legendarium");
+entries.sort((a, b) => {
+    if (a.data.created.valueOf() < b.data.created.valueOf()) {
+        return 1;
+    } else if (a.data.created.valueOf() === b.data.created.valueOf()) {
+        return 0;
+    } else {
+        return -1;
+    }
+});
+
+const latestEntries = entries.slice(0, 3);
+---
+
+<section>
+    <header class="major">
+        <h2>Recent Articles</h2>
+    </header>
+    <div class="mini-posts">
+        {latestEntries.map((entry) => <Minipost post={entry} />)}
+    </div>
+    <ul class="actions">
+        <li><a href="#" class="button">More</a></li>
+    </ul>
+</section>

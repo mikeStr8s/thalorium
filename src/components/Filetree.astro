@@ -1,5 +1,5 @@
 ---
-import type { FileTree } from '../utils/filetree';
+import type { FileTree } from "../utils/filetree";
 
 interface Props {
     filetree: FileTree;
@@ -7,33 +7,43 @@ interface Props {
 }
 const { filetree, parent } = Astro.props as Props;
 
-let ulProps = !parent ? { 'id': 'filetree' } : {};
+let ulProps = !parent ? { id: "filetree" } : {};
 
 function getParent(file: string) {
-    if (typeof parent === 'undefined') {
+    if (typeof parent === "undefined") {
         return file;
     }
     return `${parent}/${file}`;
 }
 
 function getLinkPath(file: string) {
-    if (typeof parent === 'undefined') {
+    if (typeof parent === "undefined") {
         return `/legendarium/${file}`;
     }
     return `/legendarium/${parent}/${file}`;
 }
 ---
 
-<ul { ...ulProps }>
-    {Array.from(filetree).map(([file, dir]) =>(<>
-        {(dir instanceof Map) ?
-        <li>
-            <span class="opener">{file}</span>
-            <Astro.self filetree={dir} parent={`${getParent(file)}`} />
-        </li>
-        :
-        <li><a href={getLinkPath(file)}>{file}</a></li>}
-    </>))}
+<ul {...ulProps}>
+    {
+        Array.from(filetree).map(([file, dir]) => (
+            <>
+                {dir instanceof Map ? (
+                    <li>
+                        <span class="opener">{file}</span>
+                        <Astro.self
+                            filetree={dir}
+                            parent={`${getParent(file)}`}
+                        />
+                    </li>
+                ) : (
+                    <li>
+                        <a href={getLinkPath(file)}>{file}</a>
+                    </li>
+                )}
+            </>
+        ))
+    }
 </ul>
 
 <style lang="scss">

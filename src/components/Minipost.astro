@@ -1,0 +1,31 @@
+---
+import {
+    render,
+    type InferEntrySchema,
+    type RenderedContent,
+} from "astro:content";
+
+interface Props {
+    post: {
+        id: string;
+        body?: string;
+        collection: "legendarium";
+        data: InferEntrySchema<"legendarium">;
+        rendered?: RenderedContent;
+        filePath?: string;
+    };
+}
+const { post } = Astro.props as Props;
+
+// console.log(post);
+
+const { Content } = await render(post);
+
+console.log(Content);
+---
+
+<article class="card">
+    <div class="mini-post-container"><Content /></div>
+</article>
+
+<style></style>
