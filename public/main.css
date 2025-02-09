@@ -1,3 +1,12 @@
+:root {
+  --theme-primary: #1a1a3d;
+  --theme-secondary: #000000;
+  --theme-highlight-primary: #7c4dff;
+  --theme-highlight-secondary: #5e3a7b;
+  --theme-text-primary: #b0b0b0;
+  --theme-text-secondary: #f3f3f3;
+}
+
 *,
 *::before,
 *::after {
@@ -6,13 +15,13 @@
 
 * {
   margin: 0;
-  background-color: #1a1a3d;
+  background-color: var(--theme-primary);
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  color: #b0b0b0;
+  color: var(--theme-text-primary);
 }
 
 img,
@@ -51,7 +60,7 @@ h4,
 h5,
 h6 {
   text-wrap: balance;
-  color: #f3f3f3;
+  color: var(--theme-text-secondary);
 }
 
 #root,

@@ -47,11 +47,8 @@ function getLinkPath(file: string) {
 </ul>
 
 <style lang="scss">
-    $primary-color: #f3f3f3;
-    $secondary-color: #b0b0b0;
-
     ul > li {
-        border-top: solid 1px #5e3a7b;
+        border-top: solid 1px var(--theme-highlight-secondary);
         margin-top: 5px;
         padding-top: 5px;
     }
@@ -71,11 +68,11 @@ function getLinkPath(file: string) {
                 display: block;
             }
             .opener {
-                color: $primary-color;
+                color: var(--theme-text-secondary);
             }
             a {
                 text-decoration: none;
-                color: $secondary-color;
+                color: var(--theme-text-primary);
             }
             ul {
                 display: none;

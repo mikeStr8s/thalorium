@@ -20,18 +20,23 @@ const { post, index } = Astro.props as Props;
 const { Content } = await render(post);
 
 const firstChild = index === 0;
-const cssBorder = firstChild ? 0 : 'solid 1px #5e3a7b';
+const cssBorder = firstChild ? 0 : 'solid 1px var(--theme-highlight-secondary)';
 const cssMargin = firstChild ? 0 : '5px';
 const cssPadding = firstChild ? 0 : '5px';
 
 const imgRegex = /<img[^>]*>/i;
 const match = post.rendered?.html.match(imgRegex);
 const firstImage = match ? match[0] : null;
+
+const postNameSplit = post.id.split('/');
+const postName = postNameSplit[postNameSplit.length -1].split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
 ---
 
 <article class="mini-post">
-    <Fragment set:html={firstImage}/>
+    <h3>{ postName }</h3>
+    <Fragment set:html={ firstImage }/>
     <div class="content"><Content /></div>
+    <a href={ '/legendarium/' + post.id }>Read more.</a>
 </article>
 
 <style lang="scss" define:vars={{ cssBorder, cssMargin, cssPadding }}>
@@ -42,7 +47,11 @@ const firstImage = match ? match[0] : null;
     }
 
     .content {
-        max-height: 150px;
+        max-height: 100px;
         overflow-y: hidden;
+    }
+
+    a {
+        color: var(--theme-highlight-primary);
     }
 </style>
