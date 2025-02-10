@@ -13,33 +13,96 @@ interface Props {
         data: InferEntrySchema<"legendarium">;
         rendered?: RenderedContent;
         filePath?: string;
-    }
-    index: number
+    };
+    index: number;
 }
 const { post, index } = Astro.props as Props;
 const { Content } = await render(post);
 
-const firstChild = index === 0;
-const cssBorder = firstChild ? 0 : 'solid 1px var(--theme-highlight-secondary)';
-const cssMargin = firstChild ? 0 : '5px';
-const cssPadding = firstChild ? 0 : '5px';
+const css = {
+    cssBorder: index === 0 ? 0 : "solid 1px var(--theme-highlight-secondary)",
+    cssMargin: index === 0 ? 0 : "15px",
+    cssPadding: index === 0 ? 0 : "15px",
+};
 
-const imgRegex = /<img[^>]*>/i;
-const match = post.rendered?.html.match(imgRegex);
-const firstImage = match ? match[0] : null;
+const getFirstImage = () => {
+    const match = post.rendered?.html.match(/<img[^>]*>/i);
+    return match ? match[0] : null;
+};
 
-const postNameSplit = post.id.split('/');
-const postName = postNameSplit[postNameSplit.length -1].split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+const getPostName = () => {
+    const postNameSplit = post.id.split("/");
+    return postNameSplit[postNameSplit.length - 1]
+        .split("-")
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(" ");
+};
 ---
 
 <article class="mini-post">
-    <h3>{ postName }</h3>
-    <Fragment set:html={ firstImage }/>
+    <h3>{getPostName()}</h3>
+    <Fragment set:html={getFirstImage()} />
     <div class="content"><Content /></div>
-    <a href={ '/legendarium/' + post.id }>Read more.</a>
+    <div class="mini-bar">
+        <mini-post-date data-date={post.data.created}>
+            <span class="date"></span>
+        </mini-post-date>
+        <a href={"/legendarium/" + post.id}>Read more</a>
+    </div>
 </article>
 
-<style lang="scss" define:vars={{ cssBorder, cssMargin, cssPadding }}>
+<script>
+    class MiniPostDate extends HTMLElement {
+        connectedCallback() {
+            const date = new Date(this.dataset.date as string);
+            const span = this.querySelector('.date');
+
+            if (span) {
+                span.innerHTML = this.getPostDate(date);
+            }
+        }
+
+        getPostDate(date: Date): string {
+            const now = new Date();
+            const diffInSeconds = Math.floor(
+                (now.getTime() - date.getTime()) / 1000,
+            );
+
+            if (diffInSeconds < 60) {
+                return 'less than a minute ago';
+            } else if (diffInSeconds < 300) {
+                // 5 minutes = 300 seconds
+                return 'a few minutes ago';
+            } else if (diffInSeconds < 3600) {
+                // 1 hour = 3600 seconds
+                const minutes = Math.floor(diffInSeconds / 60);
+                return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            } else if (diffInSeconds < 86400) {
+                // 24 hours = 86400 seconds
+                const hours = Math.floor(diffInSeconds / 3600);
+                return `${hours} hour${hours > 1 ? '' : ''} ago`;
+            } else if (diffInSeconds < 172800) {
+                // 48 hours = 172800 seconds
+                const time = date.toLocaleTimeString([], { timeStyle: 'short' });
+                return `Yesterday at ${time}`;
+            } else {
+                return `${date.toLocaleDateString([], { dateStyle: 'medium' })}`;
+            }
+        }
+    }
+
+    customElements.define('mini-post-date', MiniPostDate);
+</script>
+
+<style lang="scss" define:vars={{ ...css }}>
+    a {
+        color: var(--theme-highlight-primary);
+    }
+
+    h3 {
+        padding-bottom: 15px;
+    }
+
     .mini-post {
         border-top: var(--cssBorder);
         margin-top: var(--cssMargin);
@@ -49,9 +112,16 @@ const postName = postNameSplit[postNameSplit.length -1].split('-').map(part => p
     .content {
         max-height: 100px;
         overflow-y: hidden;
+        mask-image: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 1) 75%,
+            rgba(255, 255, 255, 0)
+        );
     }
 
-    a {
-        color: var(--theme-highlight-primary);
+    .mini-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 </style>

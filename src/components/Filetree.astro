@@ -22,6 +22,11 @@ function getLinkPath(file: string) {
     }
     return `/legendarium/${parent}/${file}`;
 }
+
+const getArticleName = (file: string) => {
+    return file.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+};
+
 ---
 
 <ul {...ulProps}>
@@ -30,7 +35,7 @@ function getLinkPath(file: string) {
             <>
                 {dir instanceof Map ? (
                     <li>
-                        <span class="opener">{file}</span>
+                        <span class="opener">{getArticleName(file)}</span>
                         <Astro.self
                             filetree={dir}
                             parent={`${getParent(file)}`}
@@ -38,7 +43,7 @@ function getLinkPath(file: string) {
                     </li>
                 ) : (
                     <li>
-                        <a href={getLinkPath(file)}>{file}</a>
+                        <a href={getLinkPath(file)}>{getArticleName(file)}</a>
                     </li>
                 )}
             </>
