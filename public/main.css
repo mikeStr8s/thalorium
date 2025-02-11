@@ -1,10 +1,10 @@
 :root {
-  --theme-primary: #1a1a3d;
-  --theme-secondary: #000000;
+  --theme-text-primary: #1a1a3d;
+  --theme-text-secondary: #000000;
   --theme-highlight-primary: #7c4dff;
   --theme-highlight-secondary: #5e3a7b;
-  --theme-text-primary: #b0b0b0;
-  --theme-text-secondary: #f3f3f3;
+  --theme-secondary: #b0b0b0;
+  --theme-primary: #f3f3f3;
 }
 
 *,
@@ -66,4 +66,13 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+.inactive {
+  left: -300px;
+  box-shadow: none !important;
+}
+
+a.inactive {
+  left: 0 !important;
 }

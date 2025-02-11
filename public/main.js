@@ -13,3 +13,19 @@ $filetree_openers.each((i, element) => {
         $this.toggleClass('active');
     });
 });
+
+/**
+ * Toggle sidebar
+ */
+const $sidebar = $('#sidebar');
+const $toggle = $('.toggle');
+
+$toggle.each((i, toggle) => {
+    toggle.onclick = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        toggle.classList.toggle('inactive');
+        $sidebar.toggleClass('inactive');
+    }
+});
