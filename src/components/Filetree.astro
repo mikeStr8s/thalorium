@@ -6,6 +6,10 @@ interface Props {
     parent?: string;
 }
 const { filetree, parent } = Astro.props as Props;
+const urlPattern = Astro.routePattern;
+
+console.log(filetree);
+console.log(Astro.url.pathname);
 
 let ulProps = !parent ? { id: "filetree" } : {};
 

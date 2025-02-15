@@ -1,3 +1,5 @@
+const CURRENT_PATH = window.location.pathname;
+
 /**
  * Filetree client side
  */
@@ -12,6 +14,14 @@ $filetree_openers.each((i, element) => {
         $filetree_openers.not($this).removeClass('active');
         $this.toggleClass('active');
     });
+});
+
+const $filetree_links = $('ul ul li a');
+$filetree_links.each((i, element) => {
+    const $element = $(element);
+    if (CURRENT_PATH === $element.attr('href')) {
+        $element.closest('ul').prev('span.opener').addClass('active');
+    }
 });
 
 /**
