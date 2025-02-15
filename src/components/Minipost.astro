@@ -19,12 +19,6 @@ interface Props {
 const { post, index } = Astro.props as Props;
 const { Content } = await render(post);
 
-const css = {
-    cssBorder: index === 0 ? 0 : "solid 1px var(--theme-accent)",
-    cssMargin: index === 0 ? 0 : "15px",
-    cssPadding: index === 0 ? 0 : "15px",
-};
-
 const getFirstImage = () => {
     const match = post.rendered?.html.match(/<img[^>]*>/i);
     return match ? match[0] : null;
@@ -44,10 +38,10 @@ const getPostName = () => {
     <Fragment set:html={getFirstImage()} />
     <div class="content"><Content /></div>
     <div class="mini-bar">
-        <mini-post-date data-date={post.data.created}>
+        <mini-post-date class="mini-post-date" data-date={post.data.created}>
             <span class="date"></span>
         </mini-post-date>
-        <a href={"/legendarium/" + post.id}>Read more</a>
+        <a class="button" href={"/legendarium/" + post.id}><span class="material-symbols-outlined">read_more</span>Read more</a>
     </div>
 </article>
 
@@ -94,19 +88,25 @@ const getPostName = () => {
     customElements.define('mini-post-date', MiniPostDate);
 </script>
 
-<style lang="scss" define:vars={{ ...css }}>
-    // a {
-    //     color: var(--theme-highlight-primary);
-    // }
-
+<style lang="scss">
     h3 {
         padding-bottom: 15px;
     }
 
     .mini-post {
-        border-top: var(--cssBorder);
-        margin-top: var(--cssMargin);
-        padding-top: var(--cssPadding);
+        border: solid 1px var(--theme-surface-30);
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 15px;
+        background-color: var(--theme-surface-0);
+
+        a {
+            text-decoration: none;
+            display: flex;
+            border: solid 1px var(--theme-surface-30);
+            border-radius: 7px;
+            padding: 3px;
+        }
     }
 
     .content {
@@ -123,5 +123,16 @@ const getPostName = () => {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        padding-top: 10px;
+    }
+
+    .mini-post-date {
+        display: flex;
+        align-items: center;
+    }
+
+    .date {
+        font-weight: 600;
     }
 </style>
