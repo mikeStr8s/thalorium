@@ -81,11 +81,15 @@ const getArticleName = (file: string) => {
             }
             a {
                 text-decoration: none;
-                color: var(--theme-text-primary);
+                color: var(--theme-text-offcolor);
             }
             ul {
                 display: none;
             }
         }
+    }
+
+    ul:not(#filetree) {
+        padding-left: 15px;
     }
 </style>

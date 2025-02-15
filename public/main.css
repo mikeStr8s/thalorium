@@ -17,6 +17,7 @@
   /** Light theme text colors */
   --theme-text-primary: #000000;
   --theme-text-secondary: #2c2c2c;
+  --theme-text-offcolor: #606060;
 
   /** Light theme primary colors */
   --theme-primary-0: #710286;
