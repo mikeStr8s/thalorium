@@ -1,10 +1,27 @@
 :root {
-  --theme-text-primary: #1a1a3d;
-  --theme-text-secondary: #000000;
-  --theme-highlight-primary: #7c4dff;
-  --theme-highlight-secondary: #5e3a7b;
-  --theme-secondary: #b0b0b0;
-  --theme-primary: #f3f3f3;
+  /** Base colors */
+  --theme-dark: #000000;
+  --theme-light: #ffffff;
+
+  /** Light theme text colors */
+  --theme-text-primary: #000000;
+  --theme-text-secondary: #2c2c2c;
+
+  /** Light theme primary colors */
+  --theme-primary-0: #710286;
+  --theme-primary-10: #741e86;
+  --theme-primary-20: #772f85;
+  --theme-primary-30: #7a3c85;
+  --theme-primary-40: #7c4984;
+  --theme-primary-50: #7d5484;
+
+  /** Light theme surface colors */
+  --theme-surface-0: #ffffff;
+  --theme-surface-10: #f0f0f0;
+  --theme-surface-20: #e1e1e1;
+  --theme-surface-30: #d3d3d3;
+  --theme-surface-40: #c5c5c5;
+  --theme-surface-50: #b6b6b6;
 }
 
 *,
@@ -15,13 +32,14 @@
 
 * {
   margin: 0;
-  background-color: var(--theme-primary);
+  background-color: inherit;
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   color: var(--theme-text-primary);
+  background-color: var(--theme-surface-0);
 }
 
 img,
@@ -53,6 +71,7 @@ h6 {
 p {
   text-wrap: pretty;
 }
+
 h1,
 h2,
 h3,
@@ -60,7 +79,10 @@ h4,
 h5,
 h6 {
   text-wrap: balance;
-  color: var(--theme-text-secondary);
+}
+
+a {
+  color: var(--theme-primary-30);
 }
 
 #root,

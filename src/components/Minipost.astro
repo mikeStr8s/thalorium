@@ -20,7 +20,7 @@ const { post, index } = Astro.props as Props;
 const { Content } = await render(post);
 
 const css = {
-    cssBorder: index === 0 ? 0 : "solid 1px var(--theme-highlight-secondary)",
+    cssBorder: index === 0 ? 0 : "solid 1px var(--theme-accent)",
     cssMargin: index === 0 ? 0 : "15px",
     cssPadding: index === 0 ? 0 : "15px",
 };
@@ -95,9 +95,9 @@ const getPostName = () => {
 </script>
 
 <style lang="scss" define:vars={{ ...css }}>
-    a {
-        color: var(--theme-highlight-primary);
-    }
+    // a {
+    //     color: var(--theme-highlight-primary);
+    // }
 
     h3 {
         padding-bottom: 15px;

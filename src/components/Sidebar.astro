@@ -5,6 +5,7 @@ import RecentArticles from "./RecentArticles.astro";
 
 <div id="sidebar">
     <div class="inner">
+        <img class="site-icon" src="/book-2.png" />
         <Navbar />
         <RecentArticles />
         <a href="#sidebar" class="toggle">&#9776</a>
@@ -17,7 +18,7 @@ import RecentArticles from "./RecentArticles.astro";
         top: 0;
         width: 300px;
         height: 100%;
-        box-shadow: 0 0 50px 0 rgba(0,0,0, 0.3);
+        // box-shadow: 0 0 50px 0 rgba(0,0,0, 0.3);
 
         .inner {
             position: absolute;
@@ -26,7 +27,14 @@ import RecentArticles from "./RecentArticles.astro";
             overflow-x: hidden;
             overflow-y: auto;
             height: 100%;
+            padding: 10px;
+            background-color: var(--theme-surface-10);
         }
+    }
+
+    .site-icon {
+        max-width: 35px;
+        max-height: 35px;
     }
 
     .toggle {
@@ -39,7 +47,8 @@ import RecentArticles from "./RecentArticles.astro";
         margin-left: 10px;
         margin-top: 10px;
 
-        background-color: var(--theme-secondary);
+        background-color: var(--theme-surface-50);
+        color: var(--theme-text-primary);
         text-decoration: none;
         text-align: center;
         font-size: large;
