@@ -13,8 +13,19 @@ import Sidebar from "../components/Sidebar.astro";
 		<title>The Thalorium</title>
 	</head>
 	<body>
-		<Sidebar />
-		<slot />
+		<div class="wrapper">
+			<Sidebar />
+			<div id="main">
+				<div class="inner">
+					<header class="main">
+						<img class="site-icon" src="/book-2.png" />
+						<h2>The Thalorium</h2>
+					</header>
+
+					<slot />
+				</div>
+			</div>
+		</div>
 
 		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 		<script is:inline src="/main.js"></script>
@@ -30,6 +41,25 @@ import Sidebar from "../components/Sidebar.astro";
 			margin-top: 0.5em;
 			margin-bottom: 0.5em;
 			padding-bottom: 0.5em;
+		}
+	}
+
+	.site-icon {
+        max-width: 35px;
+        max-height: 35px;
+    }
+
+	#main {
+		padding: 15px;
+		margin-top: 55px;
+	}
+
+	header.main {
+		display: flex;
+		margin-bottom: 35px;
+
+		h2 {
+			border-bottom: solid 2px var(--theme-primary-20);
 		}
 	}
 
