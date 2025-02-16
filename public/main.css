@@ -117,8 +117,3 @@ a {
 a.inactive {
   left: 0 !important;
 }
-
-/* MARKDOWN CONTENT BASE STYLES */
-p {
-  margin-bottom: 20px;
-}
