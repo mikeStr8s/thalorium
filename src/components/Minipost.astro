@@ -19,24 +19,28 @@ interface Props {
 const { post, index } = Astro.props as Props;
 const { Content } = await render(post);
 
+const imgPattern = /<img[^>]*>/i;
+const headerPattern = /<h1[^>]*>([a-zA-Z]+\s*)*<\/h1>/i;
+
 const getFirstImage = () => {
-    const match = post.rendered?.html.match(/<img[^>]*>/i);
+    const match = post.rendered?.html.match(imgPattern);
     return match ? match[0] : null;
 };
 
-const getPostName = () => {
-    const postNameSplit = post.id.split("/");
-    return postNameSplit[postNameSplit.length - 1]
-        .split("-")
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join(" ");
+const getFirstHeader = () => {
+    const match = post.rendered?.html.match(headerPattern);
+    return match ? match[0] : null;
+};
+
+const getCleanedPost = () => {
+    return post.rendered?.html.replace(imgPattern, '').replace(headerPattern, '');
 };
 ---
 
 <article class="mini-post">
-    <h3>{getPostName()}</h3>
+    <Fragment set:html={getFirstHeader()}/>
     <Fragment set:html={getFirstImage()} />
-    <div class="content"><Content /></div>
+    <div class="content"><Fragment set:html={getCleanedPost()} /></div>
     <div class="mini-bar">
         <mini-post-date class="mini-post-date" data-date={post.data.created}>
             <span class="date"></span>

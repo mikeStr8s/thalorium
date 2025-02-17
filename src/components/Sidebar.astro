@@ -12,6 +12,7 @@ import RecentArticles from "./RecentArticles.astro";
 </div>
 
 <style lang="scss">
+    /* Default: Small devices such as large phones (less than 768px) */
     #sidebar {
         position: fixed;
         top: 0;
@@ -48,4 +49,29 @@ import RecentArticles from "./RecentArticles.astro";
         font-size: large;
         opacity: 50%;
     }
+
+    /* Medium devices such as tablets (768px and up) */
+	@media only screen and (min-width: 768px) {
+	}
+
+	/* Large devices such as laptops (1024px and up) */
+	@media only screen and (min-width: 1024px) {
+        #sidebar {
+            position: relative;
+            min-width: 300px;
+            
+
+            .inner {
+                position: relative;
+            }
+        }
+
+        #sidebar.inactive {
+            left: 0;
+        }
+
+        .toggle {
+            visibility: hidden;
+        }
+	}
 </style>

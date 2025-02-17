@@ -17,9 +17,6 @@ import Sidebar from "../components/Sidebar.astro";
 			<Sidebar />
 			<div id="main">
 				<div class="inner">
-					<div class="social">
-						<a href="https://bsky.app/profile/grunkleblinkfizzle.bsky.social" title="Bluesky">🦋</a>
-					</div>
 					<header class="main">
 						<img class="site-icon" src="/book-2.png" />
 						<h2>The Thalorium</h2>
@@ -85,6 +82,7 @@ import Sidebar from "../components/Sidebar.astro";
 		display: flex;
 		padding-bottom: 10px;
 		margin-bottom: 35px;
+		margin-top: 50px;
 		border-bottom: solid 5px var(--theme-primary-20);
 
 		h2 {
@@ -103,5 +101,12 @@ import Sidebar from "../components/Sidebar.astro";
 
 	/* Large devices such as laptops (1024px and up) */
 	@media only screen and (min-width: 1024px) {
+		.wrapper {
+			display: flex;
+			gap: 50px;
+		}
+		#main {
+			margin-right: 350px;
+		}
 	}
 </style>
