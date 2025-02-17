@@ -1,15 +1,15 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-    const entries = await getCollection('legendarium');
+    const entries = await getCollection("legendarium");
     return entries.map((entry) => {
-        return ({
+        return {
             params: { slug: entry.id },
-            props: { entry }
-        })
-    })
+            props: { entry },
+        };
+    });
 }
 
 const { entry } = Astro.props;
@@ -17,5 +17,35 @@ const { Content } = await render(entry);
 ---
 
 <Layout>
-	<Content/>
+    <Content />
+    <div id="comments"></div>
 </Layout>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    import 'https://code.jquery.com/jquery-3.7.1.js';
+
+    const CURRENT_PATH = window.location.pathname;
+    const SUPABASE_URL = 'https://pdhlzmchhlsbnqenslqn.supabase.co';
+    const PUBLIC_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkaGx6bWNoaGxzYm5xZW5zbHFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk4MTcyNDAsImV4cCI6MjA1NTM5MzI0MH0.bK30uI9tJ-_YKH-a7jxt0vLvb_S2vnQd62R17nH5Kzc';
+    
+    const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
+
+    const split = CURRENT_PATH.split('/');
+    const id = split[split.length - 1];
+
+    const { data, error } = await supabase
+        .from('comments')
+        .select('*')
+        .eq('post_id', id)
+        .eq('moderated', true);
+    
+    const $comments = $('#comments');
+    for (const comment of data) {
+        const created = new Date(comment.created_at);
+        const date = created.toLocaleDateString([], { dateStyle: "medium" });
+        const time = created.toLocaleTimeString([], { timeStyle: "short" });
+        const $comment = $(`<div class="comment"><header><span><strong>${comment.author}</strong> commented on ${date} at ${time}</span></header><p>${comment.body}</p></div>`);
+        $comments.append($comment);
+    }
+</script>

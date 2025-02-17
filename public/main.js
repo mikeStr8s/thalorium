@@ -16,11 +16,12 @@ $filetree_openers.each((i, element) => {
     });
 });
 
-const $filetree_links = $('ul ul li a');
+const $filetree_links = $('ul li a');
 $filetree_links.each((i, element) => {
     const $element = $(element);
     if (CURRENT_PATH === $element.attr('href')) {
         $element.closest('ul').prev('span.opener').addClass('active');
+        $element.addClass('active');
     }
 });
 

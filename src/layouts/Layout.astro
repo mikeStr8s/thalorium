@@ -28,7 +28,7 @@ import Sidebar from "../components/Sidebar.astro";
 		</div>
 
 		<script is:inline src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		<script is:inline src="/main.js"></script>
+		<script is:inline src="/main.js" type="module"></script>
 	</body>
 </html>
 
@@ -50,8 +50,7 @@ import Sidebar from "../components/Sidebar.astro";
     }
 
 	#main {
-		// padding: 15px;
-		// margin-top: 55px;
+		padding: 15px;
 
 		.inner {
 			& > * {
@@ -106,6 +105,7 @@ import Sidebar from "../components/Sidebar.astro";
 			gap: 50px;
 		}
 		#main {
+			padding: 0;
 			margin-right: 350px;
 		}
 	}

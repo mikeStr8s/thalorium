@@ -33,19 +33,23 @@ const getFirstHeader = () => {
 };
 
 const getCleanedPost = () => {
-    return post.rendered?.html.replace(imgPattern, '').replace(headerPattern, '');
+    return post.rendered?.html
+        .replace(imgPattern, "")
+        .replace(headerPattern, "");
 };
 ---
 
 <article class="mini-post">
-    <Fragment set:html={getFirstHeader()}/>
+    <Fragment set:html={getFirstHeader()} />
     <Fragment set:html={getFirstImage()} />
     <div class="content"><Fragment set:html={getCleanedPost()} /></div>
     <div class="mini-bar">
         <mini-post-date class="mini-post-date" data-date={post.data.created}>
             <span class="date"></span>
         </mini-post-date>
-        <a class="button" href={"/legendarium/" + post.id}><span class="material-symbols-outlined">read_more</span>Read more</a>
+        <a class="button" href={"/legendarium/" + post.id}
+            ><span class="material-symbols-outlined">read_more</span>Read more</a
+        >
     </div>
 </article>
 
@@ -53,7 +57,7 @@ const getCleanedPost = () => {
     class MiniPostDate extends HTMLElement {
         connectedCallback() {
             const date = new Date(this.dataset.date as string);
-            const span = this.querySelector('.date');
+            const span = this.querySelector(".date");
 
             if (span) {
                 span.innerHTML = this.getPostDate(date);
@@ -67,29 +71,31 @@ const getCleanedPost = () => {
             );
 
             if (diffInSeconds < 60) {
-                return 'less than a minute ago';
+                return "less than a minute ago";
             } else if (diffInSeconds < 300) {
                 // 5 minutes = 300 seconds
-                return 'a few minutes ago';
+                return "a few minutes ago";
             } else if (diffInSeconds < 3600) {
                 // 1 hour = 3600 seconds
                 const minutes = Math.floor(diffInSeconds / 60);
-                return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+                return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
             } else if (diffInSeconds < 86400) {
                 // 24 hours = 86400 seconds
                 const hours = Math.floor(diffInSeconds / 3600);
-                return `${hours} hour${hours > 1 ? '' : ''} ago`;
+                return `${hours} hour${hours > 1 ? "" : ""} ago`;
             } else if (diffInSeconds < 172800) {
                 // 48 hours = 172800 seconds
-                const time = date.toLocaleTimeString([], { timeStyle: 'short' });
+                const time = date.toLocaleTimeString([], {
+                    timeStyle: "short",
+                });
                 return `Yesterday at ${time}`;
             } else {
-                return `${date.toLocaleDateString([], { dateStyle: 'medium' })}`;
+                return `${date.toLocaleDateString([], { dateStyle: "medium" })}`;
             }
         }
     }
 
-    customElements.define('mini-post-date', MiniPostDate);
+    customElements.define("mini-post-date", MiniPostDate);
 </script>
 
 <style lang="scss">

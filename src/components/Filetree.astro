@@ -6,10 +6,6 @@ interface Props {
     parent?: string;
 }
 const { filetree, parent } = Astro.props as Props;
-const urlPattern = Astro.routePattern;
-
-console.log(filetree);
-console.log(Astro.url.pathname);
 
 let ulProps = !parent ? { id: "filetree" } : {};
 
@@ -82,10 +78,14 @@ const getArticleName = (file: string) => {
             }
             .opener {
                 color: var(--theme-text-primary);
+                cursor: pointer;
             }
             a {
                 text-decoration: none;
                 color: var(--theme-text-offcolor);
+            }
+            a.active {
+                color: var(--theme-primary-30);
             }
             ul {
                 display: none;
