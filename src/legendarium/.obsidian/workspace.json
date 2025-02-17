@@ -16,9 +16,7 @@
                 "file": "People/Professor Grunkle Blinkfizzle.md",
                 "mode": "source",
                 "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Professor Grunkle Blinkfizzle"
+              }
             }
           }
         ]
@@ -33,12 +31,10 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Places/University of Sylvanar.md",
+                "file": "Foreword.md",
                 "mode": "source",
                 "source": false
-              },
-              "icon": "lucide-file",
-              "title": "University of Sylvanar"
+              }
             }
           }
         ]
@@ -60,11 +56,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
+                "sortOrder": "alphabetical"
+              }
             }
           },
           {
@@ -79,9 +72,7 @@
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              },
-              "icon": "lucide-search",
-              "title": "Search"
+              }
             }
           },
           {
@@ -89,9 +80,7 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
-              "icon": "lucide-bookmark",
-              "title": "Bookmarks"
+              "state": {}
             }
           }
         ]
@@ -114,7 +103,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Welcome.md",
+                "file": "Foreword.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,9 +111,7 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Backlinks for Welcome"
+              }
             }
           },
           {
@@ -133,12 +120,10 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Welcome.md",
+                "file": "Foreword.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Outgoing links from Welcome"
+              }
             }
           },
           {
@@ -149,9 +134,7 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              },
-              "icon": "lucide-tags",
-              "title": "Tags"
+              }
             }
           },
           {
@@ -160,10 +143,8 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Welcome.md"
-              },
-              "icon": "lucide-list",
-              "title": "Outline of Welcome"
+                "file": "Foreword.md"
+              }
             }
           }
         ]
@@ -183,17 +164,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "a6c6767f76c625b0",
+  "active": "947c5675f093c995",
   "lastOpenFiles": [
+    "Elements.md",
+    "Foreword.md",
+    "Atlas/University of Sylvanar.md",
+    "Untitled",
+    "Stories",
+    "Religion & Deities",
+    "Organizations",
+    "Items",
+    "Atlas",
     "People/Professor Grunkle Blinkfizzle.md",
-    "Places/University of Sylvanar.md",
     "_assets",
     "_assets/dd-strixhaven-full-cover-art-1.webp",
     "z_assets",
     "assets",
-    "Welcome.md",
-    "dd-strixhaven-full-cover-art-1.webp.crdownload",
-    "Places",
-    "People"
+    "dd-strixhaven-full-cover-art-1.webp.crdownload"
   ]
 }

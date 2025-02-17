@@ -17,6 +17,9 @@ import Sidebar from "../components/Sidebar.astro";
 			<Sidebar />
 			<div id="main">
 				<div class="inner">
+					<div class="social">
+						<a href="https://bsky.app/profile/grunkleblinkfizzle.bsky.social" title="Bluesky">🦋</a>
+					</div>
 					<header class="main">
 						<img class="site-icon" src="/book-2.png" />
 						<h2>The Thalorium</h2>
@@ -50,10 +53,10 @@ import Sidebar from "../components/Sidebar.astro";
     }
 
 	#main {
-		padding: 15px;
-		margin-top: 55px;
+		// padding: 15px;
+		// margin-top: 55px;
 
-		.inner:not(header) {
+		.inner {
 			& > * {
 				margin-bottom: 15px;
 			}
@@ -64,22 +67,33 @@ import Sidebar from "../components/Sidebar.astro";
 			}
 
 			& > h1 {
-				margin-top: 50px;
+				margin-top: 40px;
 			}
 
 			& pre {
 				padding: 5px;
 				border-radius: 5px;
 			}
+
+			header.main h2 {
+				border-bottom: none;
+			}
 		}
 	}
 
 	header.main {
 		display: flex;
+		padding-bottom: 10px;
 		margin-bottom: 35px;
+		border-bottom: solid 5px var(--theme-primary-20);
 
 		h2 {
-			border-bottom: solid 2px var(--theme-primary-20);
+			font-size: medium;
+		}
+
+		.site-icon {
+			max-width: 25px;
+        	max-height: 25px;
 		}
 	}
 

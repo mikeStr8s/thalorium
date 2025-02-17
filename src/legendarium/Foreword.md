@@ -1,10 +1,10 @@
 ---
-title: Welcome
-modified: 2025-01-29T10:37:16-05:00
+title: Foreword
+modified: 2025-02-16T22:48:25-05:00
 created: 2025-01-14T14:14:49-05:00
 ---
 
-**A FOREWORD BY PROFESSOR GRUNKEL BLINKFIZZLE**
+# Foreword
 
 Ah, greetings, curious reader! You've found yourself holding a treasure trove of knowledge, and I, [[People/Professor Grunkle Blinkfizzle|Professor Grunkle Blinkfizzle]] am thrilled to guide you through it. Inside these pages, you'll uncover the wonders of our world—ranging from the peculiar flora and fauna, to the fascinating cultures, races, and religions that shape our world.
 
