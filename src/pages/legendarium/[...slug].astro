@@ -18,46 +18,164 @@ const { Content } = await render(entry);
 
 <Layout>
     <Content />
+    <button id="create-comment">Create</button>
     <div id="comments">
         <hr />
         <h3>Comments</h3>
     </div>
+    <h3>Create Comment</h3>
+    <form class="comment-form">
+        <label for="fnickname">Nickname:</label>
+        <input type="text" name="nickname" id="fnickname">
+        <label for="fcomment">Comment:</label>
+        <textarea name="comment" id="fcomment"></textarea>
+        <input type="checkbox" name="send_via_magical_transport" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
+        <input class="form-submit" type="submit">
+    </form>
 </Layout>
 
 <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    import 'https://code.jquery.com/jquery-3.7.1.js';
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+    import "https://code.jquery.com/jquery-3.7.1.js";
 
     const CURRENT_PATH = window.location.pathname;
-    const SUPABASE_URL = 'https://pdhlzmchhlsbnqenslqn.supabase.co';
-    const PUBLIC_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkaGx6bWNoaGxzYm5xZW5zbHFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk4MTcyNDAsImV4cCI6MjA1NTM5MzI0MH0.bK30uI9tJ-_YKH-a7jxt0vLvb_S2vnQd62R17nH5Kzc';
-    
+    const SUPABASE_URL = "https://pdhlzmchhlsbnqenslqn.supabase.co";
+    const PUBLIC_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBkaGx6bWNoaGxzYm5xZW5zbHFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk4MTcyNDAsImV4cCI6MjA1NTM5MzI0MH0.bK30uI9tJ-_YKH-a7jxt0vLvb_S2vnQd62R17nH5Kzc";
+
+    // create supabase client
     const supabase = createClient(SUPABASE_URL, PUBLIC_ANON_KEY);
 
-    const split = CURRENT_PATH.split('/');
+    const split = CURRENT_PATH.split("/");
     const id = split[split.length - 1];
 
+    // query subapase db for moderated comments relevant to post
     const { data, error } = await supabase
-        .from('comments')
-        .select('*')
-        .eq('post_id', id)
-        .eq('moderated', true);
+        .from("comments")
+        .select("*")
+        .eq("post_id", id)
+        .eq("moderated", true);
 
-    const $comments = $('#comments');
+    // load comments into UI
+    const $comments = $("#comments");
     if (error) {
-        console.error('Error when getting post comments: ', error);
+        console.error("Error when getting post comments: ", error);
     } else if (data && data.length > 0) {
         for (const comment of data) {
             const created = new Date(comment.created_at);
-            const date = created.toLocaleDateString([], { dateStyle: "medium" });
+            const date = created.toLocaleDateString([], {
+                dateStyle: "medium",
+            });
             const time = created.toLocaleTimeString([], { timeStyle: "short" });
-            const $comment = $(`<div class="comment"><header><span><strong>${comment.author}</strong></span><span>•</span><span class="date">${date} at ${time}</span></header><p>${comment.body}</p></div>`);
+            const $comment = $(
+                `<div class="comment"><header><span><strong>${comment.author}</strong></span><span>•</span><span class="date">${date} at ${time}</span></header><p>${comment.body}</p></div>`,
+            );
             $comments.append($comment);
         }
-        $comments.css('visibility', 'visible');
+        $comments.css("visibility", "visible");
     }
-    
-    
+
+    // comment form submission
+    const $commentButton = $("#create-comment");
+    $commentButton.click(() => {
+        fetch(
+            "https://hooks.slack.com/services/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",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    blocks: [
+                        {
+                            type: "header",
+                            text: {
+                                type: "plain_text",
+                                text: "New comment waiting for approval!"
+                            },
+                        },
+                        {
+                            type: "section",
+                            fields: [
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Blog post:*\n${window.location.href}`,
+                                },
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Database:*\nhttps://supabase.com/dashboard/project/pdhlzmchhlsbnqenslqn/editor/29182?schema=public&filter=moderated%3Aeq%3AFALSE`,
+                                },
+                            ],
+                        },
+                        {
+                            type: "section",
+                            text: {
+                                type: "mrkdwn",
+                                text: `*Comment:*\nThis is auto generated via button`,
+                            },
+                        },
+                        {
+                            type: "context",
+                            elements: [
+                                {
+                                    type: "mrkdwn",
+                                    text: `*Submitted by:* ME`,
+                                },
+                            ],
+                        },
+                        {
+                            type: "divider",
+                        },
+                        {
+                            type: "actions",
+                            elements: [
+                                {
+                                    type: "button",
+                                    text: {
+                                        type: "plain_text",
+                                        emoji: true,
+                                        text: "Approve",
+                                    },
+                                    style: "primary",
+                                    action_id: "approve_comment",
+                                    value: "123456",
+                                },
+                                {
+                                    type: "button",
+                                    text: {
+                                        type: "plain_text",
+                                        emoji: true,
+                                        text: "Delete",
+                                    },
+                                    style: "danger",
+                                    action_id: "delete_comment",
+                                    value: "123456",
+                                    confirm: {
+                                        title: {
+                                            type: "plain_text",
+                                            text: "Are you sure?",
+                                        },
+                                        text: {
+                                            type: "mrkdwn",
+                                            text: "This will delete the comment permanently.",
+                                        },
+                                        confirm: {
+                                            type: "plain_text",
+                                            text: "Delete",
+                                        },
+                                        deny: {
+                                            type: "plain_text",
+                                            text: "Cancel",
+                                        },
+                                        style: "danger",
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                }),
+            },
+        ).then((response) => {
+            console.log(response);
+        });
+    });
 </script>
 
 <style lang="scss">
@@ -67,5 +185,24 @@ const { Content } = await render(entry);
         gap: 10px;
 
         visibility: hidden;
+    }
+
+    .comment-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form .form-submit {
+        color: var(--theme-light);
+        background-color: var(--theme-primary-20);
+        // border: solid 1px var(--theme-primary-10);
+        border-radius: 7px;
+        padding: 3px;
+    }
+
+    form input,textarea {
+        border: solid 1px var(--theme-surface-30);
+        border-radius: 7px;
+        padding: 3px;
     }
 </style>
