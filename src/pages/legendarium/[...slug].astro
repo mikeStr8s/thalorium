@@ -26,9 +26,9 @@ const { Content } = await render(entry);
     <h3>Create Comment</h3>
     <form id="comment-form" class="comment-form">
         <label for="fnickname">Nickname:</label>
-        <input type="text" name="nickname" id="fnickname">
+        <input type="text" name="nickname" id="fnickname" required>
         <label for="fcomment">Comment:</label>
-        <textarea name="comment" id="fcomment"></textarea>
+        <textarea name="comment" id="fcomment" required></textarea>
         <input type="checkbox" name="send_via_magical_transport" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
         <input class="form-submit" type="submit">
     </form>
@@ -77,7 +77,7 @@ const { Content } = await render(entry);
 
     // comment form submission
     const $form = $('#comment-form');
-    $form.on('submit', (e) => {
+    $form.on('submit', async (e) => {
         e.preventDefault();
 
         const data = new FormData($form[0]);
@@ -95,118 +95,21 @@ const { Content } = await render(entry);
             }
         }
 
-        fetch('https://pdhlzmchhlsbnqenslqn.supabase.co/functions/v1/post-new-comment', {
+        const $formInputs = $('#comment-form :input');
+        $formInputs.prop('disabled', true);
+
+        await fetch('https://pdhlzmchhlsbnqenslqn.supabase.co/functions/v1/post-new-comment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${PUBLIC_ANON_KEY}`
             },
             body: JSON.stringify(postData)
-        }).then((response) => {
-            console.log(response);
         });
+
+        $formInputs.prop('disabled', false);
+        $('#comment-form').find('input[type="text"], textarea').val('');
     });
-    
-    // const $commentButton = $("#create-comment");
-    // $commentButton.click(() => {
-    //     fetch(
-    //         "https://hooks.slack.com/services/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",
-    //         {
-    //             method: "POST",
-    //             body: JSON.stringify({
-    //                 blocks: [
-    //                     {
-    //                         type: "header",
-    //                         text: {
-    //                             type: "plain_text",
-    //                             text: "New comment waiting for approval!"
-    //                         },
-    //                     },
-    //                     {
-    //                         type: "section",
-    //                         fields: [
-    //                             {
-    //                                 type: "mrkdwn",
-    //                                 text: `*Blog post:*\n${window.location.href}`,
-    //                             },
-    //                             {
-    //                                 type: "mrkdwn",
-    //                                 text: `*Database:*\nhttps://supabase.com/dashboard/project/pdhlzmchhlsbnqenslqn/editor/29182?schema=public&filter=moderated%3Aeq%3AFALSE`,
-    //                             },
-    //                         ],
-    //                     },
-    //                     {
-    //                         type: "section",
-    //                         text: {
-    //                             type: "mrkdwn",
-    //                             text: `*Comment:*\nThis is auto generated via button`,
-    //                         },
-    //                     },
-    //                     {
-    //                         type: "context",
-    //                         elements: [
-    //                             {
-    //                                 type: "mrkdwn",
-    //                                 text: `*Submitted by:* ME`,
-    //                             },
-    //                         ],
-    //                     },
-    //                     {
-    //                         type: "divider",
-    //                     },
-    //                     {
-    //                         type: "actions",
-    //                         elements: [
-    //                             {
-    //                                 type: "button",
-    //                                 text: {
-    //                                     type: "plain_text",
-    //                                     emoji: true,
-    //                                     text: "Approve",
-    //                                 },
-    //                                 style: "primary",
-    //                                 action_id: "approve_comment",
-    //                                 value: "123456",
-    //                             },
-    //                             {
-    //                                 type: "button",
-    //                                 text: {
-    //                                     type: "plain_text",
-    //                                     emoji: true,
-    //                                     text: "Delete",
-    //                                 },
-    //                                 style: "danger",
-    //                                 action_id: "delete_comment",
-    //                                 value: "123456",
-    //                                 confirm: {
-    //                                     title: {
-    //                                         type: "plain_text",
-    //                                         text: "Are you sure?",
-    //                                     },
-    //                                     text: {
-    //                                         type: "mrkdwn",
-    //                                         text: "This will delete the comment permanently.",
-    //                                     },
-    //                                     confirm: {
-    //                                         type: "plain_text",
-    //                                         text: "Delete",
-    //                                     },
-    //                                     deny: {
-    //                                         type: "plain_text",
-    //                                         text: "Cancel",
-    //                                     },
-    //                                     style: "danger",
-    //                                 },
-    //                             },
-    //                         ],
-    //                     },
-    //                 ],
-    //             }),
-    //         },
-    //     ).then((response) => {
-    //         console.log(response);
-    //     });
-    // });
 </script>
 
 <style lang="scss">
