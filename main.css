@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=read_more');
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+:root {
+  /** Base colors */
+  --theme-dark: #000000;
+  --theme-light: #ffffff;
+
+  /** Light theme text colors */
+  --theme-text-primary: #000000;
+  --theme-text-secondary: #2c2c2c;
+  --theme-text-offcolor: #606060;
+
+  /** Light theme primary colors */
+  --theme-primary-0: #710286;
+  --theme-primary-10: #741e86;
+  --theme-primary-20: #772f85;
+  --theme-primary-30: #7a3c85;
+  --theme-primary-40: #7c4984;
+  --theme-primary-50: #7d5484;
+
+  /** Light theme surface colors */
+  --theme-surface-0: #ffffff;
+  --theme-surface-10: #f0f0f0;
+  --theme-surface-20: #e1e1e1;
+  --theme-surface-30: #d3d3d3;
+  --theme-surface-40: #c5c5c5;
+  --theme-surface-50: #b6b6b6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  background-color: inherit;
+}
+
+body {
+  background-color: var(--theme-surface-0);
+  color: var(--theme-text-secondary);
+  font-family: "Lato", serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+  font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--theme-text-primary);
+}
+
+a {
+  color: var(--theme-primary-30);
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+.inactive {
+  left: -300px;
+  box-shadow: none !important;
+}
+
+a.inactive {
+  left: 0 !important;
+}
+
+.comment {
+  background-color: var(--theme-surface-10);
+  padding: 10px;
+  /* border: solid 1px var(--theme-surface-30); */
+  border-radius: 10px;
+}
+
+.comment header {
+  display: flex;
+  gap: 5px;
+  border-bottom: solid 1px var(--theme-surface-30);
+}
+
+span.date {
+  color: var(--theme-text-offcolor);
+}
