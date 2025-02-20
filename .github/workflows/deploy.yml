@@ -24,3 +24,11 @@ jobs:
         uses: withastro/action@v2
         with:
             package-manager: bun@latest
+      - name: Push
+        uses: s0/git-publishsubdir-action@develop
+        env:
+            REPO: self
+            BRANCH: build
+            FOLDER: dist
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            MESSAGE: "Build: ({sha}) {msg}"
