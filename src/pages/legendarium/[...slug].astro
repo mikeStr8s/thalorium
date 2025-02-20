@@ -18,20 +18,24 @@ const { Content } = await render(entry);
 
 <Layout>
     <Content />
-    <button id="create-comment">Create</button>
     <div id="comments">
         <hr />
         <h3>Comments</h3>
+        <p id="comment-status"></p>
     </div>
-    <h3>Create Comment</h3>
-    <form id="comment-form" class="comment-form">
-        <label for="fnickname">Nickname:</label>
-        <input type="text" name="nickname" id="fnickname" required>
-        <label for="fcomment">Comment:</label>
-        <textarea name="comment" id="fcomment" required></textarea>
-        <input type="checkbox" name="send_via_magical_transport" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
-        <input class="form-submit" type="submit">
-    </form>
+    <div class="form-container">
+        <form id="comment-form" class="comment-form">
+            <label for="fnickname">Nickname:</label>
+            <input type="text" name="nickname" id="fnickname" required>
+            <label for="fcomment">Message:</label>
+            <textarea name="comment" id="fcomment" required></textarea>
+            <input type="checkbox" name="send_via_magical_transport" value="1" style="display:none !important" tabindex="-1" autocomplete="off">
+            <input class="form-submit" type="submit" value="Comment">
+        </form>
+        <div id="overlay">
+            <img id="throbber" class="site-icon" src="/book-2.png" />
+        </div>
+    </div>
 </Layout>
 
 <script type="module">
@@ -58,8 +62,11 @@ const { Content } = await render(entry);
 
     // load comments into UI
     const $comments = $("#comments");
+    const $commentStatus = $('#comment-status');
     if (error) {
         console.error("Error when getting post comments: ", error);
+        $commentStatus.text('Error getting post comments...');
+        $commentStatus.show();
     } else if (data && data.length > 0) {
         for (const comment of data) {
             const created = new Date(comment.created_at);
@@ -73,6 +80,9 @@ const { Content } = await render(entry);
             $comments.append($comment);
         }
         $comments.css("visibility", "visible");
+    } else {
+        $commentStatus.text('Be the first to comment on this article!');
+        $commentStatus.show();
     }
 
     // comment form submission
@@ -96,7 +106,9 @@ const { Content } = await render(entry);
         }
 
         const $formInputs = $('#comment-form :input');
+        const $formOverlay = $('#overlay');
         $formInputs.prop('disabled', true);
+        $formOverlay.css('display', 'flex');
 
         await fetch('https://pdhlzmchhlsbnqenslqn.supabase.co/functions/v1/post-new-comment', {
             method: 'POST',
@@ -107,8 +119,9 @@ const { Content } = await render(entry);
             body: JSON.stringify(postData)
         });
 
-        $formInputs.prop('disabled', false);
         $('#comment-form').find('input[type="text"], textarea').val('');
+        $formInputs.prop('disabled', false);
+        $formOverlay.css('display', 'none');
     });
 </script>
 
@@ -117,19 +130,22 @@ const { Content } = await render(entry);
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
 
-        visibility: hidden;
+    #comment-status {
+        display: none;
     }
 
     .comment-form {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
+        max-width: 450px;
     }
 
     form .form-submit {
         color: var(--theme-light);
         background-color: var(--theme-primary-20);
-        // border: solid 1px var(--theme-primary-10);
         border-radius: 7px;
         padding: 3px;
     }
@@ -138,5 +154,44 @@ const { Content } = await render(entry);
         border: solid 1px var(--theme-surface-30);
         border-radius: 7px;
         padding: 3px;
+    }
+
+    .form-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    #overlay {
+        position: absolute;
+        display: none;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg) scale(1);
+            animation-timing-function: ease-in;
+        }
+        60% {
+            transform: rotate(900deg) scale(1.2);
+            animation-timing-function: ease-out;
+        }
+        80% {
+            transform: rotate(1080deg) scale(1);
+        }
+        100% {
+            transform: rotate(1080deg);
+        }
+    }
+
+    #throbber {
+        animation: spin 1s infinite;
+        opacity: 50%;
     }
 </style>
