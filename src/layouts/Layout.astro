@@ -13,6 +13,9 @@ import Sidebar from "../components/Sidebar.astro";
 		<title>The Thalorium</title>
 	</head>
 	<body>
+		<div class="alpha-banner hazard-border">
+			<span>site in alpha!</span>
+		</div>
 		<div class="wrapper">
 			<Sidebar />
 			<div id="main">
@@ -34,6 +37,31 @@ import Sidebar from "../components/Sidebar.astro";
 
 <style lang="scss" is:global>
 	/* Default: Small devices such as large phones (less than 768px) */
+	.alpha-banner {
+		display: flex;
+		justify-content: center;
+		position: fixed;
+		z-index: 1000000;
+		width: 200px;
+		background-color: #ffb101;
+		// border-top: dashed 2px black;
+		// border-bottom: dashed 2px black;
+		transform: rotate(45deg);
+		right: -45px;
+		top: 33px;
+	}
+
+	.hazard-border {
+		border: 5px solid pink;
+		border-image: repeating-linear-gradient(
+			-55deg,
+			#000,
+			#000 20px,
+			#ffb101 20px,
+			#ffb101 40px
+		) 10;
+	}
+
 	.major {
 		h2 {
 			width: fit-content;
