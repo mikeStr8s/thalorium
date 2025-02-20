@@ -1,12 +1,67 @@
 ---
-import { getCollection } from "astro:content";
-import Filetree from "../components/Filetree.astro";
+import Image from "astro/components/Image.astro";
+import headerImage from "../assets/book-stack.png";
 import Layout from "../layouts/Layout.astro";
-import { buildFileTree } from "../utils/filetree";
 
 
 ---
 
 <Layout>
-    
+    <header class="page-header">
+        <Image src={ headerImage } alt="book"></Image>
+        <div class="salutation-container">
+            <h1 id="salutations">Welcome to The Thalorium</h1>
+            <h3 class="summary">USEFUL RESOURCES AND TOOLS FOR DUNGEONS AND DRAGONS</h3>
+            <p class="description">
+                <em>The Thalorium</em> is the lofty name given to the field notes of Prof. Grunkle Blinkfizzle. 
+                He has graciously provided the original, unedited volumes for transcription here!
+                Along with his work, you will find other resources to assist in playing and running Dungeons and Dragons.
+            </p>
+        </div>
+    </header>
 </Layout>
+
+<style lang="scss">
+    .page-header {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    .salutation-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        & > * {
+            border: none !important;
+        }
+        & > *:not(h1) {
+            color: var(--theme-text-offcolor);
+        }
+        #salutations {
+            font-size: 40pt;
+        }
+    }
+
+    /* Medium devices such as tablets (768px and up) */
+	@media only screen and (min-width: 768px) {
+	}
+
+	/* Large devices such as laptops (1024px and up) */
+	@media only screen and (min-width: 1024px) {
+		.page-header {
+            display: flex;
+            flex-direction: row-reverse;
+
+            img {
+                width: 50%;
+                height: 50%;
+            }
+        }
+	}
+</style>

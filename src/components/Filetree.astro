@@ -31,7 +31,7 @@ const getArticleName = (file: string) => {
 
 <ul {...ulProps}>
     {
-        Array.from(filetree).map(([file, dir]) => (
+        Array.from(filetree).sort((a, b) => a[0].localeCompare(b[0])).map(([file, dir]) => (
             <>
                 {dir instanceof Map ? (
                     <li>
@@ -77,7 +77,7 @@ const getArticleName = (file: string) => {
                 font-weight: 600;
             }
             .opener {
-                color: var(--theme-text-primary);
+                color: var(--theme-text-secondary);
                 cursor: pointer;
             }
             a {

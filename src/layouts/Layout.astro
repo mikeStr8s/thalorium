@@ -106,7 +106,8 @@ import Sidebar from "../components/Sidebar.astro";
 		}
 		#main {
 			padding: 0;
-			margin-right: 350px;
+			// margin-right: 350px;
+			margin-right: max(50px, min(calc(100vw - 1360px), 350px));
 		}
 	}
 </style>
