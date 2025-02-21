@@ -15,8 +15,10 @@ interface Props {
         filePath?: string;
     };
     index: number;
+    class: string;
 }
-const { post, index } = Astro.props as Props;
+
+const { class: className, post, index, ...rest } = Astro.props as Props;
 const { Content } = await render(post);
 
 const imgPattern = /<img[^>]*>/i;
@@ -39,9 +41,11 @@ const getCleanedPost = () => {
 };
 ---
 
-<article class="mini-post">
+<article class={className} {...rest}>
     <Fragment set:html={getFirstHeader()} />
-    <Fragment set:html={getFirstImage()} />
+    <div class="crop">
+        <Fragment set:html={getFirstImage()} />
+    </div>
     <div class="content"><Fragment set:html={getCleanedPost()} /></div>
     <div class="mini-bar">
         <mini-post-date class="mini-post-date" data-date={post.data.created}>
@@ -145,5 +149,11 @@ const getCleanedPost = () => {
 
     .date {
         font-weight: 600;
+    }
+
+    .crop {
+        width: 100%;
+        max-height: 150px;
+        overflow: hidden;
     }
 </style>

@@ -4,27 +4,54 @@ import Minipost from "./Minipost.astro";
 
 const entries = await getCollection("legendarium");
 entries.sort((a, b) => {
-    if (a.data.created.valueOf() < b.data.created.valueOf()) {
-        return 1;
-    } else if (a.data.created.valueOf() === b.data.created.valueOf()) {
-        return 0;
-    } else {
-        return -1;
-    }
+  if (a.data.created.valueOf() < b.data.created.valueOf()) {
+    return 1;
+  } else if (a.data.created.valueOf() === b.data.created.valueOf()) {
+    return 0;
+  } else {
+    return -1;
+  }
 });
 
-const latestEntries = entries.slice(0, 3);
+const latestEntries = entries.slice(0, 4);
 ---
 
 <section>
-    <header class="major">
-        <h2>Recent Articles</h2>
-    </header>
-    <div class="mini-posts">
-        {latestEntries.map((entry, idx) => <Minipost post={entry} index={idx} />)}
-    </div>
+  <header class="major">
+    <h2>Recent Articles</h2>
+  </header>
+  <div class="mini-posts">
+    {latestEntries.map((entry, idx) => <Minipost class="mini-post" post={entry} index={idx} />)}
+  </div>
 </section>
 
 <style lang="scss">
-    
+  .mini-posts {
+    display: flex;
+    flex-wrap: wrap;
+
+    .mini-post {
+      padding: 15px;
+      background-color: var(--theme-surface-10);
+    }
+  }
+
+  /* Medium devices such as tablets (768px and up) */
+	@media only screen and (min-width: 768px) {
+	}
+
+	/* Large devices such as laptops (1024px and up) */
+	@media only screen and (min-width: 1024px) {
+		.mini-posts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, auto);
+      grid-column-gap: 15px;
+      grid-row-gap: 0px;
+
+      .mini-post {
+
+      }
+    }
+	}
 </style>
