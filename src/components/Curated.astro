@@ -10,7 +10,9 @@ import Layout from "../layouts/Layout.astro";
   </header>
   <div class="curated-container">
     <article>
-      <img src="/book-2.png" alt="Dead Simple DM Icon">
+      <div class="img-container">
+        <img src="/dsdm-icon.png" alt="Dead Simple DM Icon">
+      </div>
       <h3>Dead Simple DM</h3>
       <p>
         The dungeon master tool that gets out of your way so you can just play D&D.
@@ -34,6 +36,12 @@ import Layout from "../layouts/Layout.astro";
     margin-top: 15px;
     // background-color: var(--theme-surface-10);
     border: solid 2px var(--theme-surface-10);
+
+    .img-container {
+      border-radius: 5px;
+      overflow: hidden;
+      width: fit-content;
+    }
 
     img {
       max-width: 100px;

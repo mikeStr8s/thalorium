@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "People/Professor Grunkle Blinkfizzle.md",
+                "file": "Atlas/University of Sylvanar.md",
                 "mode": "source",
                 "source": false
               }
@@ -29,12 +29,8 @@
             "id": "a6c6767f76c625b0",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Foreword.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -103,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Foreword.md",
+                "file": "Atlas/University of Sylvanar.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Foreword.md",
+                "file": "Atlas/University of Sylvanar.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -143,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Foreword.md"
+                "file": "Atlas/University of Sylvanar.md"
               }
             }
           }
@@ -164,18 +160,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "947c5675f093c995",
+  "active": "b36269787c8a62c2",
   "lastOpenFiles": [
+    "A Foreword.md",
+    "Characters/Professor Grunkle Blinkfizzle.md",
     "Elements.md",
     "Foreword.md",
     "Atlas/University of Sylvanar.md",
     "Untitled",
-    "Stories",
+    "Lore",
     "Religion & Deities",
     "Organizations",
     "Items",
     "Atlas",
-    "People/Professor Grunkle Blinkfizzle.md",
     "_assets",
     "_assets/dd-strixhaven-full-cover-art-1.webp",
     "z_assets",
