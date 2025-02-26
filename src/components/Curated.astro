@@ -17,7 +17,9 @@ import Layout from "../layouts/Layout.astro";
         I do not want a tool that is trying to manage my campaign or run my session.
         I want a digital replacement to printouts and standees.
       </p>
-      <a class="button" href="/dsdm/"><span class="material-symbols-outlined">read_more</span>Read more</a>
+      <div class="link">
+        <a class="button" href="/dsdm/"><span class="material-symbols-outlined">read_more</span>Try It Out!</a>
+      </div>
     </article>
   </div>
 </section>
@@ -30,20 +32,29 @@ import Layout from "../layouts/Layout.astro";
     border-radius: 10px;
     padding: 10px;
     margin-top: 15px;
-    background-color: var(--theme-surface-10);
+    // background-color: var(--theme-surface-10);
+    border: solid 2px var(--theme-surface-10);
 
     img {
       max-width: 100px;
       max-height: 100px;
     }
+
+    .link {
+      display: flex;
+      justify-content: end;
+    }
+
     a {
       text-decoration: none;
       display: flex;
       gap: 5px;
       border-radius: 7px;
       padding: 5px;
-      color: var(--theme-light);
-      background-color: var(--theme-primary-20);
+      color: var(--theme-primary-20);
+      // background-color: var(--theme-primary-20);
+      border: solid 2px var(--theme-primary-20);
+      width: fit-content;
     }
   }
 
