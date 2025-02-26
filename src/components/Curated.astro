@@ -1,0 +1,57 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+
+---
+
+<section>
+  <header class="major">
+    <h2>Suggested</h2>
+  </header>
+  <div class="curated-container">
+    <article>
+      <img src="/book-2.png" alt="Dead Simple DM Icon">
+      <h3>Dead Simple DM</h3>
+      <p>
+        The dungeon master tool that gets out of your way so you can just play D&D.
+        I do not want a tool that is trying to manage my campaign or run my session.
+        I want a digital replacement to printouts and standees.
+      </p>
+      <a class="button" href="/dsdm/"><span class="material-symbols-outlined">read_more</span>Read more</a>
+    </article>
+  </div>
+</section>
+
+<style lang="scss">
+  .curated-container {
+  }
+
+  article {
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: var(--theme-surface-10);
+
+    img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+    a {
+      text-decoration: none;
+      display: flex;
+      gap: 5px;
+      border-radius: 7px;
+      padding: 5px;
+      color: var(--theme-light);
+      background-color: var(--theme-primary-20);
+    }
+  }
+
+  /* Medium devices such as tablets (768px and up) */
+	@media only screen and (min-width: 768px) {
+	}
+
+	/* Large devices such as laptops (1024px and up) */
+	@media only screen and (min-width: 1024px) {
+	}
+</style>
