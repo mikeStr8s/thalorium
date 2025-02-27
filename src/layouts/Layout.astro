@@ -22,7 +22,7 @@ import Sidebar from "../components/Sidebar.astro";
 				<div class="inner">
 					<header class="main">
 						<img class="site-icon" src="/book-2.png" />
-						<h2>The Thalorium</h2>
+						<h2><a href="/">The Thalorium</a></h2>
 					</header>
 
 					<slot />
@@ -101,6 +101,11 @@ import Sidebar from "../components/Sidebar.astro";
 
 			header.main h2 {
 				border-bottom: none;
+				
+				a {
+				text-decoration: none;
+				color: inherit;
+			}
 			}
 		}
 	}
