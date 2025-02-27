@@ -127,6 +127,22 @@ import Sidebar from "../components/Sidebar.astro";
 		}
 	}
 
+	/* Style the stickynote as a card */
+	.stickynote {
+		float: right; /* Make content wrap around it */
+		margin: 10px; /* Add space around the card */
+		background: #ffeb3b; /* Sticky note yellow */
+		padding: 1em;
+		border-radius: 8px;
+		box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+		width: 200px; /* Optional fixed width */
+	}
+
+	/* Optional: Add a slight rotation for authenticity */
+	.stickynote {
+		transform: rotate(2deg);
+	}
+
 	/* Medium devices such as tablets (768px and up) */
 	@media only screen and (min-width: 768px) {
 	}
