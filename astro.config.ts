@@ -4,7 +4,7 @@ import remarkWikiLink, { getPermalinks } from '@portaljs/remark-wiki-link';
 
 
 export default defineConfig({
-  site: 'https://thalorium.com',
+  site: 'https://www.thalorium.com',
   integrations: [mdx()],
   markdown: {
     remarkPlugins: [
